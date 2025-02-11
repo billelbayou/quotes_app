@@ -10,26 +10,26 @@ app.use(express.json());
 app.use(cors());
 
 // Create a new post
-app.post("/posts", async (req, res) => {
+app.post("/quotes", async (req, res) => {
   try {
-    const { content, author } = req.body;
-    const newPost = await prisma.post.create({
-      data: { content, author },
+    const { quote, author } = req.body;
+    const newQuote = await prisma.quote.create({
+      data: { quote, author },
     });
-    res.json(newPost);
+    res.json(newQuote);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create post" });
+    res.status(500).json({ error: "Failed to create quote" });
   }
 });
 
 // Get all posts
-app.get("/posts", async (req, res) => {
+app.get("/quotes", async (req, res) => {
   try {
-    const posts = await prisma.post.findMany();
+    const quotes = await prisma.quote.findMany();
     res.type("json");
-    res.send(posts);
+    res.send(quotes);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch posts" });
+    res.status(500).json({ error: "Failed to fetch quotes" });
   }
 });
 
